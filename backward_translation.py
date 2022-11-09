@@ -36,6 +36,8 @@ def read_value(value_before_dot: str, value_after_dot: str) -> str:
 def read_int_value(value: str, isafterdot: bool = False, position: int = 0, result: str = ''):
     if position == len(value):
         return result
+    if isafterdot and value[position] == '0':
+        return read_int_value(value, isafterdot, position + 1, result)
     return read_int_value(value, isafterdot, position + 1,
                           result + get_translated_int_value(
                               (int(value[position]) * 10 ** (len(value) - position - 1)), isafterdot) + ' ')
